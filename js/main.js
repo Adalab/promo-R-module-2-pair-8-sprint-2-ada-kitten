@@ -82,30 +82,46 @@ function handleClickNewCatForm(event) {
 }
 
 //Adicionar nuevo gatito
+
+function 
+
+
 function addNewKitten(event) {
     event.preventDefault();
-    const valueDesc = inputDesc.value;
-    const valuePhoto = inputPhoto.value;
-    const valueName = inputName.value;
-    const valueRace = inputRace.value;
+    let valueDesc = inputDesc.value;
+    let valuePhoto = inputPhoto.value;
+    let valueName = inputName.value;
+    let valueRace = inputRace.value;
     
     const newKittenDataObject = {
         image: valuePhoto,
         name: valueName,
         desc: valueDesc,
         race: valueRace
-        
-    }
+    };
+
     kittenDataList.push(newKittenDataObject); 
     renderKittenList(kittenDataList);
+
+    
+
     if (valueDesc === "" && valuePhoto === "" && valueName === "") {
         labelMesageError.innerHTML = "Debe rellenar todos los valores";
     } else {
         if (valueDesc !== "" && valuePhoto !== "" && valueName !== "") {
             labelMesageError.innerHTML = "";
         }
-    }
+    };
+
+    if(valueDesc !== "" || valuePhoto !== "" || valueName !== "" || valueRace !== "" ) {
+        valueDesc = "";
+        valuePhoto = "";
+        valueName = "";
+        valueRace = "";
+    };
+
 }
+
 
 
 
@@ -139,7 +155,6 @@ linkNewFormElememt.addEventListener("click", handleClickNewCatForm);
 searchButton.addEventListener("click", filterKitten);
 buttonAdd.addEventListener("click", addNewKitten);
 buttonCancelForm.addEventListener("click", cancelNewKitten);
-
 
 //Agregar un nuevo gatito al listado (clase arrays y bucles 2)
 
