@@ -83,7 +83,6 @@ function handleClickNewCatForm(event) {
 
 //Adicionar nuevo gatito
 
-function 
 
 
 function addNewKitten(event) {
@@ -100,24 +99,18 @@ function addNewKitten(event) {
         race: valueRace
     };
 
-    kittenDataList.push(newKittenDataObject); 
-    renderKittenList(kittenDataList);
-
-    
-
     if (valueDesc === "" && valuePhoto === "" && valueName === "") {
         labelMesageError.innerHTML = "Debe rellenar todos los valores";
     } else {
         if (valueDesc !== "" && valuePhoto !== "" && valueName !== "") {
-            labelMesageError.innerHTML = "";
+            labelMesageError.innerHTML = 'Mola! Un nuevo gatito en Adalab!';
+            kittenDataList.push(newKittenDataObject); 
+            renderKittenList(kittenDataList);
+            inputDesc.value = "";
+            inputPhoto.value = "";
+            inputName.value = "";
+            inputRace.value = "";
         }
-    };
-
-    if(valueDesc !== "" || valuePhoto !== "" || valueName !== "" || valueRace !== "" ) {
-        valueDesc = "";
-        valuePhoto = "";
-        valueName = "";
-        valueRace = "";
     };
 
 }
@@ -138,12 +131,12 @@ function cancelNewKitten(event) {
 //Filtrar por descripción
 function filterKitten(event) {
     event.preventDefault();
-    const descrSearchText = input_search_desc.value;
+    // const descrSearchText = input_search_desc.value;
     listElement.innerHTML = "";
-    for (const kittenItem of kittenDataList) {
-        if (kittenItem.desc.includes(descrSearchText)) {
-            listElement.innerHTML += renderKitten(kittenItem);
-        }
+    const filterKittens = kittenDataList.filter((kittenItem) => kittenItem.desc.includes(input_search_desc.value));
+    console.log(filterKittens);
+    for (const kittenItem of filterKittens) {
+        listElement.innerHTML += renderKitten(kittenItem);
     }
 }
 
