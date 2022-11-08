@@ -14,7 +14,7 @@ const inputRace = document.querySelector('.js-input-race');
 const linkNewFormElememt = document.querySelector('.js-button-new-form');
 const labelMesageError = document.querySelector('.js-label-error');
 const input_search_desc = document.querySelector('.js_in_search_desc');
-
+const input_search_race = document.querySelector('.js_in_search_race');
 
 //Objetos con cada gatito
 const kittenData_1 = {
@@ -36,7 +36,7 @@ const kittenData_3 = {
     race: "British Shorthair",
 };
 
-let kittenDataList = [kittenData_1, kittenData_2, kittenData_3];
+//let kittenDataList = [kittenData_1, kittenData_2, kittenData_3]; //lo comentamos para traer la información de los gatitos desde el servidor "fetch"
 
 //Funciones
 function renderKitten(kittenData) {
@@ -57,9 +57,9 @@ function renderKitten(kittenData) {
     return kitten;
 }
 
-function renderKittenList(kittenDataList) {
+function renderKittenList(kittenDataListparametre) {
     listElement.innerHTML = "";
-    for (const kittenItem of kittenDataList) {
+    for (const kittenItem of kittenDataListparametre) { 
         listElement.innerHTML += renderKitten(kittenItem);
     }
 }
@@ -129,7 +129,7 @@ function cancelNewKitten(event) {
 }
 
 //Filtrar por descripción
-function filterKitten(event) {
+/*function filterKitten(event) {
     event.preventDefault();
     // const descrSearchText = input_search_desc.value;
     listElement.innerHTML = "";
@@ -138,7 +138,23 @@ function filterKitten(event) {
     for (const kittenItem of filterKittens) {
         listElement.innerHTML += renderKitten(kittenItem);
     }
-}
+}*/
+
+
+//Filtrar por descripción y raza
+
+function filterKitten(event) {
+    event.preventDefault();
+    // const descrSearchText = input_search_desc.value;
+    listElement.innerHTML = "";
+    const filterKittens = kittenDataList
+        .filter((kittenItem) => kittenItem.desc.includes(input_search_desc.value))
+        .filter((kittenItem) => kittenItem.race.includes(input_search_race.value));
+    console.log(filterKittens);
+        for (const kittenItem of filterKittens) {
+            listElement.innerHTML += renderKitten(kittenItem);
+        }
+    }
 
 //Mostrar el litado de gatitos en ell HTML
 renderKittenList(kittenDataList);
